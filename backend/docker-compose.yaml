@@ -1,0 +1,57 @@
+version: "3"
+services:
+  strapi:
+    container_name: strapi
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - 1337:1337
+    volumes:
+      - ./config:/opt/app/config
+      - ./src:/opt/app/src
+      - ./package.json:/opt/package.json
+      - ./yarn.lock:/opt/yarn.lock
+      - ./.env:/opt/app/.env
+      - ./public/uploads:/opt/app/public/uploads
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    networks:
+      - strapi
+
+  postgres:
+    container_name: postgres
+    image: postgres:15-alpine
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=bidwave
+      - POSTGRES_USER=bidwave
+      - POSTGRES_DB=bidwave-cms
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - strapi
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - 5050:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@bidwave.com
+      - PGADMIN_DEFAULT_PASSWORD=bidwave
+    networks:
+      - strapi
+
+volumes:
+  postgres-data:
+
+networks:
+  strapi:
+    name: strapi
+    driver: bridge

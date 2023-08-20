@@ -18,6 +18,7 @@ A realtime auction platform built on SvelteKit and Strapi
 - Install [Docker](https://www.docker.com/products/docker-desktop/)
 - Install [Yarn](https://yarnpkg.com/getting-started/install) (for backend dev only)
 - Install [Postgres](https://www.postgresql.org/download/) (for backend dev only)
+- Clone the repository - `git clone https://github.com/dhzdhd/bidwave.git`
 
 ### Backend
 
@@ -28,6 +29,7 @@ A realtime auction platform built on SvelteKit and Strapi
   - DATABASE_HOST - 127.0.0.1
   - DATABASE_USERNAME - your local postgres username
   - DATABASE_PASSWORD - your local postgres password
+- Run `yarn install`
 - Run `yarn run develop`
 
 ### Backend - for frontend dev

@@ -1,13 +1,26 @@
 # bidwave
+
 A realtime auction platform built on SvelteKit and Strapi
 
-- title
-- abstract
-- team mem/role
-- functional req, non func req  (I/P/o)
-- tools and tech
-- conclusion
-- refs
+## Roles
+
+- Backend
+  - Sagar
+  - Srinivas
+- Frontend
+  - Sourabhgagan
+  - Anagha
+  - Tanisha
+
+## Synopsis structure
+
+- Title
+- Abstract
+- Team mem/role
+- Functional req, non func req  (I/P/O)
+- Tools and tech
+- Conclusion
+- Refs
 
 ## Setup
 

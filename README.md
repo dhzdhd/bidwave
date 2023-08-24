@@ -15,12 +15,18 @@ A realtime auction platform built on SvelteKit and Strapi
 ## Synopsis structure
 
 - Title
-- Abstract
-- Team mem/role
-- Functional req, non func req  (I/P/O)
-- Tools and tech
-- Conclusion
-- Refs
+- Introduction
+- Motivation
+- Objective
+- Methodology
+- Members
+- Roles
+- Modules 
+- Software
+- Learning Curve
+- Process Model
+- Conclusion 
+- References
 
 ## Setup
 

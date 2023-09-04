@@ -4,8 +4,7 @@
   "info": {
     "singularName": "product",
     "pluralName": "products",
-    "displayName": "Product",
-    "description": ""
+    "displayName": "Product"
   },
   "options": {
     "draftAndPublish": true
@@ -13,46 +12,38 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "auction_end": {
-      "type": "datetime",
-      "required": true
+      "type": "datetime"
     },
     "price": {
-      "type": "biginteger",
-      "required": true
+      "type": "biginteger"
     },
     "image": {
-      "type": "media",
-      "multiple": true,
-      "required": true,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ]
+      ],
+      "type": "media",
+      "multiple": true
     },
-    "weight": {
-      "type": "decimal",
-      "required": true
+    "number": {
+      "type": "decimal"
     },
     "bid_price": {
-      "type": "biginteger",
-      "required": true
+      "type": "biginteger"
     },
     "description": {
       "type": "richtext"
     },
     "auction_start": {
-      "type": "datetime",
-      "required": true
+      "type": "datetime"
     },
     "available": {
-      "type": "boolean",
-      "required": true
+      "type": "boolean"
     },
     "bids": {
       "type": "relation",

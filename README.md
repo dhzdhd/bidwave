@@ -21,14 +21,22 @@ A realtime auction platform built on SvelteKit and Strapi
 - Methodology
 - Members
 - Roles
-- Modules 
+- Modules
 - Software
 - Learning Curve
 - Process Model
-- Conclusion 
+- Conclusion
 - References
 
 ## Setup
+
+### GitHub
+
+- Fork the repository and clone it locally.
+- Create a new branch with the name being your feature/bugfix in short. For example -
+  - `feat/login-page`
+  - `fix/setup-error`
+- After implementing the feature/fix, push it to your fork and create a pull request.
 
 ### Prerequisites
 

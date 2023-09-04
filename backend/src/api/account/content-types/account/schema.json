@@ -4,7 +4,8 @@
   "info": {
     "singularName": "account",
     "pluralName": "accounts",
-    "displayName": "Account"
+    "displayName": "Account",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "balance": {
-      "type": "biginteger"
+      "type": "biginteger",
+      "required": true
     },
     "user": {
       "type": "relation",

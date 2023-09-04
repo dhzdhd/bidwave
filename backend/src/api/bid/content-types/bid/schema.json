@@ -4,7 +4,8 @@
   "info": {
     "singularName": "bid",
     "pluralName": "bids",
-    "displayName": "Bid"
+    "displayName": "Bid",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "value": {
-      "type": "biginteger"
+      "type": "biginteger",
+      "required": true
     },
     "account": {
       "type": "relation",

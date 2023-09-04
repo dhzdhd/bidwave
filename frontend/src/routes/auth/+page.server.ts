@@ -5,12 +5,12 @@ const apiUrl = 'http://localhost:1337/api';
 export const actions = {
 	login: async ({ cookies, request }) => {
 		const data = await request.formData();
-		const email = data.get('email');
+		const identifier = data.get('identifier');
 		const password = data.get('password');
 
 		const response = await fetch(`${apiUrl}/auth/local`, {
 			method: 'POST',
-			body: JSON.stringify({ "identifier": email, password })
+			body: JSON.stringify({ identifier, password })
 		});
 		const json = await response.json()
 

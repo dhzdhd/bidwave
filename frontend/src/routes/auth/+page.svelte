@@ -1,7 +1,21 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
+	import { page } from '$app/stores';
 	import { fade, fly } from 'svelte/transition';
 
 	let isSignIn = false;
+	let email = '';
+	let password = '';
+	let name = '';
+	let showPopup = false;
+
+	// $: if ($page.status === 500 && showPopup === false) {
+	// 	showPopup = true;
+	// 	const timeout = setTimeout(() => {
+	// 		showPopup = false;
+	// 	}, 2000);
+	// 	clearTimeout(timeout);
+	// }
 
 	const toggle = () => {
 		isSignIn = !isSignIn;
@@ -14,7 +28,7 @@
 			transition:fade={{ duration: 200 }}
 			class="form-container {isSignIn ? 'sign-in-container' : 'sign-up-container'}"
 		>
-			<form action="#">
+			<form method="POST" action={isSignIn ? '?/login' : '?/register'} use:enhance>
 				<h1>{isSignIn ? 'Sign In' : 'Create Account'}</h1>
 				<div class="social-container">
 					<a href="#" class="social"><i class="fab fa-facebook-f" /></a>
@@ -23,10 +37,10 @@
 				</div>
 				<span>or use your account</span>
 				{#if !isSignIn}
-					<input type="text" placeholder="Name" />
+					<input bind:value={name} name="name" type="text" placeholder="Name" />
 				{/if}
-				<input type="email" placeholder="Email" />
-				<input type="password" placeholder="Password" />
+				<input bind:value={email} name="email" type="email" placeholder="Email" />
+				<input bind:value={password} name="password" type="password" placeholder="Password" />
 				<a href="#" class="forgpass">Forgot your password?</a>
 				<button>{isSignIn ? 'Sign In' : 'Sign Up'}</button>
 			</form>
@@ -48,6 +62,11 @@
 			</div>
 		{/key}
 	</div>
+	{#if showPopup}
+		<div class="popup">
+			<span>Error</span>
+		</div>
+	{/if}
 </div>
 
 <style lang="sass">
@@ -61,6 +80,13 @@
 		flex-direction: column
 		font-family: 'Montserrat', sans-serif
 		height: 100vh
+
+		.popup
+			position: absolute
+			bottom: 1rem
+			background-color: red
+			padding: 0.5rem 2rem
+			border-radius: 1rem
 
 	h1
 		color: #d7d7d7

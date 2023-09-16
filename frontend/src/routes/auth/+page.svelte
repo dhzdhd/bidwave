@@ -1,0 +1,199 @@
+<script lang="ts">
+	import { fade, fly } from 'svelte/transition';
+
+	let isSignIn = false;
+
+	const toggle = () => {
+		isSignIn = !isSignIn;
+	};
+</script>
+
+<div class="body">
+	<div class="container" id="container">
+		<div
+			transition:fade={{ duration: 200 }}
+			class="form-container {isSignIn ? 'sign-in-container' : 'sign-up-container'}"
+		>
+			<form action="#">
+				<h1>{isSignIn ? 'Sign In' : 'Create Account'}</h1>
+				<div class="social-container">
+					<a href="#" class="social"><i class="fab fa-facebook-f" /></a>
+					<a href="#" class="social"><i class="fab fa-google-plus-g" /></a>
+					<a href="#" class="social"><i class="fab fa-linkedin-in" /></a>
+				</div>
+				<span>or use your account</span>
+				{#if !isSignIn}
+					<input type="text" placeholder="Name" />
+				{/if}
+				<input type="email" placeholder="Email" />
+				<input type="password" placeholder="Password" />
+				<a href="#" class="forgpass">Forgot your password?</a>
+				<button>{isSignIn ? 'Sign In' : 'Sign Up'}</button>
+			</form>
+		</div>
+		{#key isSignIn}
+			<div
+				transition:fly={{ x: isSignIn ? '24rem' : '-24rem', duration: 500 }}
+				class="overlay-container {isSignIn ? 'overlay-left' : 'overlay-right'}"
+			>
+				{#if isSignIn}
+					<h1>Welcome Back!</h1>
+					<p>To keep connected with us please login with your personal info</p>
+					<button on:click={toggle} class="ghost" id="signUp">Sign Up</button>
+				{:else}
+					<h1>Hello, Bidder!</h1>
+					<p>Enter your personal details and start your journey with us</p>
+					<button on:click={toggle} class="ghost" id="signIn">Sign In</button>
+				{/if}
+			</div>
+		{/key}
+	</div>
+</div>
+
+<style lang="sass">
+	@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800')
+
+	.body
+		background: rgb(18, 18, 18)
+		display: flex
+		justify-content: center
+		align-items: center
+		flex-direction: column
+		font-family: 'Montserrat', sans-serif
+		height: 100vh
+
+	h1
+		color: #d7d7d7
+		font-weight: bold
+		margin: 0
+
+	p
+		font-size: 14px
+		font-weight: 100
+		line-height: 20px
+		letter-spacing: 0.5px
+		margin: 20px 0 30px
+
+	span
+		font-size: 12px
+		color: #d7d7d7
+
+	a
+		color: white
+		font-size: 14px
+		text-decoration: none
+		margin: 15px 0
+		background-color: rgb(18, 18, 18)
+
+	.forgpass
+		color: #d7d7d7
+		font-size: 14px
+		text-decoration: none
+		margin: 15px 0
+		background-color: transparent
+
+	button
+		border-radius: 20px
+		background-color: #725bdb
+		color: #ffffff
+		font-size: 12px
+		font-weight: bold
+		padding: 12px 45px
+		letter-spacing: 1px
+		text-transform: uppercase
+		transition: transform 80ms ease-in
+		border: solid
+		border-color: black
+		cursor: pointer
+
+		&:active
+			transform: scale(0.95)
+
+		&:focus
+			outline: none
+
+	button.ghost
+		background-color: transparent
+		border-width: 1px
+
+	form
+		background-color: #121212
+		display: flex
+		align-items: center
+		justify-content: center
+		flex-direction: column
+		padding: 0 50px
+		height: 100%
+		text-align: center
+
+	input
+		background-color: rgb(0, 0, 0)
+		padding: 12px 15px
+		margin: 8px 0
+		width: 100%
+		border-radius: 15px
+		border: none
+		color: white
+
+	.container
+		background-color: #121212
+		border-radius: 0.5rem
+		box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)
+		position: relative
+		display: flex
+		flex-direction: row
+		width: 48rem
+		min-height: 30rem
+		border-color: #725bdb
+		border: solid
+
+	.form-container
+		position: absolute
+		height: 100%
+		width: 50%
+		border-radius: 2rem
+
+	form
+		background-color: transparent
+
+	.sign-in-container
+		right: 0
+
+	.sign-up-container
+		left: 0
+		border-radius: 0.5rem 0 0 0.5rem
+
+	.overlay-container
+		position: absolute
+		width: 50%
+		height: 100%
+		background: linear-gradient(to bottom right, #302175, #725bdb)
+		color: #ffffff
+		display: flex
+		align-items: center
+		justify-content: center
+		flex-direction: column
+		padding: 0 3rem
+		text-align: center
+
+	.overlay-right
+		right: 0
+		border-radius: 0 0.5rem 0.5rem 0
+
+	.overlay-left
+		left: 0
+		border-radius: 0.5rem 0 0 0.5rem
+
+	.social-container
+		margin: 20px 0
+
+	.social-container a
+		border: 1px solid #121212
+		border-radius: 50%
+		display: inline-flex
+		justify-content: center
+		align-items: center
+		margin: 0 5px
+		height: 40px
+		width: 40px
+</style>

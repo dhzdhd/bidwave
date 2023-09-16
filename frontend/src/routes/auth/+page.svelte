@@ -30,12 +30,12 @@
 		>
 			<form method="POST" action={isSignIn ? '?/login' : '?/register'} use:enhance>
 				<h1>{isSignIn ? 'Sign In' : 'Create Account'}</h1>
-				<div class="social-container">
+				<!-- <div class="social-container">
 					<a href="#" class="social"><i class="fab fa-facebook-f" /></a>
 					<a href="#" class="social"><i class="fab fa-google-plus-g" /></a>
 					<a href="#" class="social"><i class="fab fa-linkedin-in" /></a>
 				</div>
-				<span>or use your account</span>
+				<span>or use your account</span> -->
 				{#if !isSignIn}
 					<input bind:value={name} name="name" type="text" placeholder="Name" />
 				{/if}
@@ -91,7 +91,7 @@
 	h1
 		color: #d7d7d7
 		font-weight: bold
-		margin: 0
+		margin: 1rem 0rem
 
 	p
 		font-size: 14px

@@ -22,71 +22,60 @@
 	};
 </script>
 
-<div class="body">
-	<div in:fly={{ y: 200 }} class="container" id="container">
-		<div class="form-container {isSignIn ? 'sign-in-container' : 'sign-up-container'}">
-			<form method="POST" action={isSignIn ? '?/login' : '?/register'} use:enhance>
-				<h1>{isSignIn ? 'Sign In' : 'Create Account'}</h1>
-				<!-- <div class="social-container">
+<div in:fly={{ y: 200 }} class="container" id="container">
+	<div class="form-container {isSignIn ? 'sign-in-container' : 'sign-up-container'}">
+		<form method="POST" action={isSignIn ? '?/login' : '?/register'} use:enhance>
+			<h1>{isSignIn ? 'Sign In' : 'Create Account'}</h1>
+			<!-- <div class="social-container">
 					<a href="#" class="social"><i class="fab fa-facebook-f" /></a>
 					<a href="#" class="social"><i class="fab fa-google-plus-g" /></a>
 					<a href="#" class="social"><i class="fab fa-linkedin-in" /></a>
 				</div>
 				<span>or use your account</span> -->
-				{#if !isSignIn}
-					<input bind:value={name} name="name" type="text" placeholder="Name" />
-				{/if}
-				<input bind:value={email} name="email" type="email" placeholder="Email" />
-				<input bind:value={password} name="password" type="password" placeholder="Password" />
-				<a href="#" class="forgpass">Forgot your password?</a>
-				<button>{isSignIn ? 'Sign In' : 'Sign Up'}</button>
-			</form>
-		</div>
-		{#key isSignIn}
-			<div
-				transition:fly={{ x: isSignIn ? '24rem' : '-24rem', duration: 500 }}
-				class="overlay-container {isSignIn ? 'overlay-left' : 'overlay-right'}"
-			>
-				{#if isSignIn}
-					<h1>Welcome Back!</h1>
-					<p>To keep connected with us please login with your personal info</p>
-					<button on:click={toggle} class="ghost" id="signUp">Sign Up</button>
-				{:else}
-					<h1>Hello, Bidder!</h1>
-					<p>Enter your personal details and start your journey with us</p>
-					<button on:click={toggle} class="ghost" id="signIn">Sign In</button>
-				{/if}
-			</div>
-		{/key}
+			{#if !isSignIn}
+				<input bind:value={name} name="name" type="text" placeholder="Name" />
+			{/if}
+			<input bind:value={email} name="email" type="email" placeholder="Email" />
+			<input bind:value={password} name="password" type="password" placeholder="Password" />
+			<a href="/auth/forgot" class="forgpass">Forgot your password?</a>
+			<button>{isSignIn ? 'Sign In' : 'Sign Up'}</button>
+		</form>
 	</div>
-	{#if showPopup}
-		<div in:fly={{ y: 200 }} out:fade class="popup">
-			{$page.form.message}
+	{#key isSignIn}
+		<div
+			transition:fly={{ x: isSignIn ? '24rem' : '-24rem', duration: 500 }}
+			class="overlay-container {isSignIn ? 'overlay-left' : 'overlay-right'}"
+		>
+			{#if isSignIn}
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button on:click={toggle} class="ghost" id="signUp">Sign Up</button>
+			{:else}
+				<h1>Hello, Bidder!</h1>
+				<p>Enter your personal details and start your journey with us</p>
+				<button on:click={toggle} class="ghost" id="signIn">Sign In</button>
+			{/if}
 		</div>
-	{/if}
+	{/key}
 </div>
+{#if showPopup}
+	<div in:fly={{ y: 200 }} out:fade class="popup">
+		{$page.form.message}
+	</div>
+{/if}
 
 <style lang="sass">
 	@import '../../vars'
 
-	.body
-		background: $primary
-		display: flex
-		justify-content: center
-		align-items: center
-		flex-direction: column
-		font-family: 'Montserrat', sans-serif
-		height: 100vh
-
-		.popup
-			position: fixed
-			bottom: 2rem
-			color: white
-			font-size: 1rem
-			font-weight: bold
-			background-color: red
-			padding: 0.5rem 2rem
-			border-radius: 1rem
+	.popup
+		position: fixed
+		bottom: 2rem
+		color: white
+		font-size: 1rem
+		font-weight: bold
+		background-color: red
+		padding: 0.5rem 2rem
+		border-radius: 1rem
 
 	h1
 		color: $text

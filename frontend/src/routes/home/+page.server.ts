@@ -2,7 +2,7 @@ import type { PageServerLoad } from './$types';
 
 const apiUrl = 'http://localhost:1337/api';
 
-interface Product {
+export interface Product {
 	id: number;
 	name: string;
 	auctionEnd: string; // Change to date
@@ -15,7 +15,7 @@ interface Product {
 	image: Image;
 }
 
-interface Image {
+export interface Image {
 	alt: string;
 	width: number;
 	height: number;

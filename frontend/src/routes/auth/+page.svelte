@@ -23,11 +23,8 @@
 </script>
 
 <div class="body">
-	<div class="container" id="container">
-		<div
-			transition:fade={{ duration: 200 }}
-			class="form-container {isSignIn ? 'sign-in-container' : 'sign-up-container'}"
-		>
+	<div in:fly={{ y: 200 }} class="container" id="container">
+		<div class="form-container {isSignIn ? 'sign-in-container' : 'sign-up-container'}">
 			<form method="POST" action={isSignIn ? '?/login' : '?/register'} use:enhance>
 				<h1>{isSignIn ? 'Sign In' : 'Create Account'}</h1>
 				<!-- <div class="social-container">

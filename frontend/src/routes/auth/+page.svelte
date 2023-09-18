@@ -70,8 +70,10 @@
 </div>
 
 <style lang="sass">
+	@import '../../vars'
+
 	.body
-		background: rgb(18, 18, 18)
+		background: $primary
 		display: flex
 		justify-content: center
 		align-items: center
@@ -90,7 +92,7 @@
 			border-radius: 1rem
 
 	h1
-		color: #d7d7d7
+		color: $text
 		font-weight: bold
 		margin: 1rem 0rem
 
@@ -103,34 +105,26 @@
 
 	span
 		font-size: 12px
-		color: #d7d7d7
-
-	a
-		color: white
-		font-size: 14px
-		text-decoration: none
-		margin: 15px 0
-		background-color: rgb(18, 18, 18)
+		color: $text
 
 	.forgpass
-		color: #d7d7d7
-		font-size: 14px
+		color: $text
+		font-size: 0.9rem
 		text-decoration: none
-		margin: 15px 0
+		margin: 1rem 0
 		background-color: transparent
 
 	button
 		border-radius: 20px
-		background-color: #725bdb
-		color: #ffffff
+		background-color: $accent
+		color: $inverted
 		font-size: 12px
 		font-weight: bold
 		padding: 12px 45px
 		letter-spacing: 1px
 		text-transform: uppercase
 		transition: transform 80ms ease-in
-		border: solid
-		border-color: black
+		border: none
 		cursor: pointer
 
 		&:active
@@ -141,10 +135,10 @@
 
 	button.ghost
 		background-color: transparent
-		border-width: 1px
+		border: solid 1px
 
 	form
-		background-color: #121212
+		background-color: $primary
 		display: flex
 		align-items: center
 		justify-content: center
@@ -154,7 +148,7 @@
 		text-align: center
 
 	input
-		background-color: rgb(0, 0, 0)
+		background-color: $secondary
 		padding: 12px 15px
 		margin: 8px 0
 		width: 100%
@@ -163,16 +157,12 @@
 		color: white
 
 	.container
-		background-color: #121212
+		background-color: $primary
 		border-radius: 0.5rem
-		box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)
+		box-shadow: 0 0 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)
 		position: relative
-		display: flex
-		flex-direction: row
 		width: 48rem
 		min-height: 30rem
-		border-color: #725bdb
-		border: solid
 
 	.form-container
 		position: absolute
@@ -194,8 +184,8 @@
 		position: absolute
 		width: 50%
 		height: 100%
-		background: linear-gradient(to bottom right, #302175, #725bdb)
-		color: #ffffff
+		background: linear-gradient(to bottom right, $darker-accent, $accent)
+		color: $inverted
 		display: flex
 		align-items: center
 		justify-content: center

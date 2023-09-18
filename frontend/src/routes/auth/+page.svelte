@@ -9,13 +9,13 @@
 	let name = '';
 	let showPopup = false;
 
-	// $: if ($page.status === 500 && showPopup === false) {
-	// 	showPopup = true;
-	// 	const timeout = setTimeout(() => {
-	// 		showPopup = false;
-	// 	}, 2000);
-	// 	clearTimeout(timeout);
-	// }
+	$: if ($page.status !== 200) {
+		showPopup = true;
+
+		setTimeout(() => {
+			showPopup = false;
+		}, 2000);
+	}
 
 	const toggle = () => {
 		isSignIn = !isSignIn;
@@ -63,15 +63,13 @@
 		{/key}
 	</div>
 	{#if showPopup}
-		<div class="popup">
-			<span>Error</span>
+		<div in:fly={{ y: 200 }} out:fade class="popup">
+			{$page.form.message}
 		</div>
 	{/if}
 </div>
 
 <style lang="sass">
-	@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800')
-
 	.body
 		background: rgb(18, 18, 18)
 		display: flex
@@ -82,8 +80,11 @@
 		height: 100vh
 
 		.popup
-			position: absolute
-			bottom: 1rem
+			position: fixed
+			bottom: 2rem
+			color: white
+			font-size: 1rem
+			font-weight: bold
 			background-color: red
 			padding: 0.5rem 2rem
 			border-radius: 1rem

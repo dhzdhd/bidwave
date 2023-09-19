@@ -1,15 +1,7 @@
-import { fail, redirect } from '@sveltejs/kit';
-import type { Actions, PageServerLoad } from './$types';
+import { fail } from '@sveltejs/kit';
+import type { Actions } from './$types';
 
 const apiUrl = 'http://localhost:1337/api';
-
-export const load: PageServerLoad = async ({ cookies }) => {
-	const jwt = cookies.get('sessionjwt');
-	// Check for expiry using current time (30 days currently)
-	if (jwt) {
-		throw redirect(307, '/');
-	}
-};
 
 export const actions = {
 	login: async ({ cookies, request }) => {

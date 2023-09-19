@@ -1,15 +1,22 @@
 <script>
-	let email = '';
+	let password = '';
+	let confirmPassword = '';
 
 	import { fly } from 'svelte/transition';
 </script>
 
 <div in:fly={{ y: 200 }} class="container" id="container">
 	<div class="top">
-		<h1>Enter your email</h1>
+		<h1>Enter your new password</h1>
 	</div>
-	<form method="POST" class="bottom">
-		<input bind:value={email} name="email" type="email" placeholder="Email" />
+	<form class="bottom">
+		<input bind:value={password} name="password" type="password" placeholder="Password" />
+		<input
+			bind:value={confirmPassword}
+			name="password"
+			type="password"
+			placeholder="Confirm password"
+		/>
 		<a href="/auth" class="back">Back to login</a>
 		<button>Submit</button>
 	</form>

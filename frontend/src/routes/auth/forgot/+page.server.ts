@@ -2,6 +2,8 @@ import type { Actions } from './$types';
 
 export const actions = {
 	default: async ({ request }) => {
+		console.log('fefe');
+
 		const formData = await request.formData();
 		const email = formData.get('email') as string;
 
@@ -10,7 +12,7 @@ export const actions = {
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ email })
 		});
-		console.log(resp);
+		console.log(await resp.json());
 
 		return { success: true };
 	}

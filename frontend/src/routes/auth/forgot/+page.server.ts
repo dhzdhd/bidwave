@@ -1,19 +1,30 @@
+import { fail } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
 export const actions = {
 	default: async ({ request }) => {
-		console.log('fefe');
-
 		const formData = await request.formData();
 		const email = formData.get('email') as string;
 
-		const resp = await fetch('http://localhost:1337/api/auth/forgot-password', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ email })
-		});
-		console.log(await resp.json());
+		if (email.trim() === '') {
+			return fail(401, { message: 'Invalid credentials!' });
+		}
 
-		return { success: true };
+		try {
+			const resp = await fetch('http://localhost:1337/api/auth/forgot-password', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ email })
+			});
+			const data = await resp.json();
+
+			if (resp.status !== 200) {
+				return fail(resp.status, { message: JSON.stringify(data) });
+			}
+
+			return { success: true };
+		} catch (err) {
+			return fail(500, { message: 'Failed to initiate password reset!' });
+		}
 	}
 } satisfies Actions;

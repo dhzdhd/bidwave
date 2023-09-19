@@ -10,18 +10,27 @@ export const actions = {
 		const password = data.get('password') as string;
 
 		if (identifier.trim() === '' || password.trim() === '') {
-			return fail(422, { message: 'Invalid credentials' });
+			return fail(401, { message: 'Invalid credentials' });
 		}
 
-		const response = await fetch(`${apiUrl}/auth/local`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ identifier, password })
-		});
-		const json = await response.json();
+		try {
+			const response = await fetch(`${apiUrl}/auth/local`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ identifier, password })
+			});
+			const data = await response.json();
 
-		cookies.set('sessionjwt', json.jwt);
-		return { success: true };
+			if (response.status !== 200) {
+				return fail(response.status, { message: JSON.stringify(data) });
+			}
+
+			cookies.set('sessionjwt', data.jwt);
+			return { success: true };
+		} catch (err) {
+			console.log(err);
+			return fail(500, { message: 'Failed to login!' });
+		}
 	},
 	register: async ({ cookies, request }) => {
 		const data = await request.formData();
@@ -29,8 +38,8 @@ export const actions = {
 		const email = data.get('email') as string;
 		const password = data.get('password') as string;
 
-		if (username?.trim() === '' || password?.trim() === '' || email?.trim() === '') {
-			return fail(422, { message: 'Invalid credentials' });
+		if (username.trim() === '' || password.trim() === '' || email.trim() === '') {
+			return fail(401, { message: 'Invalid credentials' });
 		}
 
 		try {
@@ -39,22 +48,16 @@ export const actions = {
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ username: username, email, password })
 			});
+			const data = await response.json();
 
 			if (response.status !== 200) {
-				console.log(JSON.stringify(await response.json()));
-
-				return fail(500, { message: 'Failed to register!' });
+				return fail(response.status, { message: JSON.stringify(data) });
 			}
 
-			const json = await response.json();
-			console.log(json);
-
-			cookies.set('sessionjwt', json.jwt);
-
+			cookies.set('sessionjwt', data.jwt);
 			return { success: true };
 		} catch (err) {
 			console.log(err);
-
 			return fail(500, { message: 'Failed to register!' });
 		}
 	}

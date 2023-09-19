@@ -5,6 +5,6 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
 	const jwt = cookies.get('sessionjwt');
 	// Check for expiry using current time (30 days currently)
 	if (jwt) {
-		throw redirect(307, '/');
+		throw redirect(307, '/home');
 	}
 };

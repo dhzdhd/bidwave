@@ -9,11 +9,11 @@
 	<div class="top">
 		<h1>Enter your new password</h1>
 	</div>
-	<form class="bottom">
+	<form method="POST" class="bottom">
 		<input bind:value={password} name="password" type="password" placeholder="Password" />
 		<input
 			bind:value={confirmPassword}
-			name="password"
+			name="confirm"
 			type="password"
 			placeholder="Confirm password"
 		/>

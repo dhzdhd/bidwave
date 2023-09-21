@@ -4,6 +4,7 @@
 	import { fly } from 'svelte/transition';
 </script>
 
+<!-- TODO Create popup to ask to check email -->
 <div in:fly={{ y: 200 }} class="container" id="container">
 	<div class="top">
 		<h1>Enter your email</h1>

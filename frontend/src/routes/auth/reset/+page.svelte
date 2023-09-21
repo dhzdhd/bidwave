@@ -5,6 +5,7 @@
 	import { fly } from 'svelte/transition';
 </script>
 
+<!-- TODO Redirect on successful submission -->
 <div in:fly={{ y: 200 }} class="container" id="container">
 	<div class="top">
 		<h1>Enter your new password</h1>

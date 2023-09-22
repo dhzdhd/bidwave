@@ -24,8 +24,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: List files
-        run: tree
+      - name: List files & remove lock file
+        run: tree && rm ./backend/yarn.lock
 
       - name: Install cosign
         if: github.event_name != 'pull_request'

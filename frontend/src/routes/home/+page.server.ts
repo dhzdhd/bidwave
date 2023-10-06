@@ -24,6 +24,8 @@ export interface Image {
 }
 
 export const load: PageServerLoad = async ({ cookies }) => {
+	return {};
+
 	const response = await fetch(`${apiUrl}/products?populate=*`, {
 		method: 'GET',
 		headers: {

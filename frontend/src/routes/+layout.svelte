@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import '../global.sass';
 
 	const socialLinks = [
@@ -15,9 +16,17 @@
 		<img src="transparent.svg" alt="logo" />
 		<h1>BidWave</h1>
 	</a>
-	<nav>
-		<button on:click={async () => await goto('/auth')} class="login-button">Login</button>
-	</nav>
+	{#if $page.url.pathname === '/'}
+		<nav>
+			<button on:click={async () => await goto('/auth')} class="login-button">Login</button>
+		</nav>
+	{:else if $page.url.pathname !== '/auth'}
+		<nav>
+			<ul>
+				<li><a href="/home">Home</a></li>
+			</ul>
+		</nav>
+	{/if}
 </header>
 <main>
 	<slot />
@@ -71,6 +80,18 @@
 				color: vars.$inverted
 				font-weight: bold
 				cursor: pointer
+
+			ul
+				li
+					list-style: none
+
+					a
+						font-size: 1.4rem
+						color: vars.$text
+						text-decoration: none
+
+						&:hover
+							color: vars.$accent
 
 	main
 		min-height: 100vh

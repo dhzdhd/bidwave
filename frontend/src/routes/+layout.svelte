@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import '../global.sass';
 
 	const socialLinks = [
@@ -11,7 +12,7 @@
 
 <header>
 	<div class="title">
-		<img src="transparent.svg" />
+		<img src="transparent.svg" alt="logo" />
 		<h1>BidWave</h1>
 	</div>
 	<nav>

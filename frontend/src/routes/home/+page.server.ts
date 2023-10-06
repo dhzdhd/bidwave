@@ -1,6 +1,7 @@
 import type { PageServerLoad } from './$types';
 
 const apiUrl = 'http://localhost:1337/api';
+const url = 'http://localhost:1337';
 
 export interface Product {
 	id: number;
@@ -24,12 +25,10 @@ export interface Image {
 }
 
 export const load: PageServerLoad = async ({ cookies }) => {
-	return {};
-
 	const response = await fetch(`${apiUrl}/products?populate=*`, {
 		method: 'GET',
 		headers: {
-			Authorization: `Bearer ${cookies.get('sessionJwt')}`
+			Authorization: `Bearer ${cookies.get('sessionjwt')}`
 		}
 	});
 
@@ -54,7 +53,7 @@ export const load: PageServerLoad = async ({ cookies }) => {
 					width: rawImage['width'],
 					height: rawImage['height'],
 					mime: rawImage['mime'],
-					url: rawImage['url']
+					url: `${url}${rawImage['url']}`
 				} satisfies Image
 			} satisfies Product;
 		})

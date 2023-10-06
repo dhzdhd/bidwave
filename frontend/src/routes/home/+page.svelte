@@ -1,22 +1,25 @@
 <script lang="ts">
-    export let data;
-    let products = ["hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi", "hi"]
+	import type { Product } from './+page.server';
+
+	export let data: { products: Product[] };
+
+	console.log(data.products[0].image.url);
 </script>
 
 <section>
-    <h1>Featured Products</h1>
-    <div class="container">
-        {#each products as product}
-            <div class="product">
-                <img src="https://cdn-images.farfetch-contents.com/13/77/09/62/13770962_17126919_1000.jpg" alt="">
-                <div class="description">
-                    <span class="category">Clothes</span>
-                    <h5 class="title">Astronaut T-shirts</h5>
-                    <h4 class="price">$100</h4>
-                </div>
-            </div>
-        {/each}
-    </div>
+	<h1>Featured Products</h1>
+	<div class="container">
+		{#each data.products as product}
+			<div class="product">
+				<img src={product.image.url} alt="" />
+				<div class="description">
+					<span class="category">Clothes</span>
+					<h5 class="title">{product.name}</h5>
+					<h4 class="price">${product.bidPrice}</h4>
+				</div>
+			</div>
+		{/each}
+	</div>
 </section>
 
 <style lang="sass">
@@ -29,22 +32,23 @@ section
     align-items: center
     padding: 5rem 2rem
     color: vars.$inverted
-    text-align: center      
+    text-align: center
 
     h1
         font-size: 2rem
         color: vars.$text
 
     .container
-        display: grid 
+        display: grid
         gap: 1rem
         grid-template-columns: repeat(3, 1fr)
 
         .product
             width: 23%
-            min-width: 250px
+            min-width: 20rem
             padding: 10px 12px
             border-radius: 25px
+            place-self: center
             cursor: pointer
             transition: 0.2s
 

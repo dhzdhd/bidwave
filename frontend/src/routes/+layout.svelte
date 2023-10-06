@@ -19,7 +19,9 @@
 		<button on:click={() => goto('/auth')} class="login-button">Login</button>
 	</nav>
 </header>
-<slot />
+<main>
+	<slot />
+</main>
 <footer>
 	{#each socialLinks as link}
 		<a class="social-link" href={link.url} target="_blank">{link.name}</a>
@@ -69,6 +71,10 @@
 				color: vars.$inverted
 				font-weight: bold
 				cursor: pointer
+
+	main
+		min-height: 100vh
+		width: 100%
 
 	footer
 		position: relative

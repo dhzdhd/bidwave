@@ -76,6 +76,7 @@
 		background-color: red
 		padding: 0.5rem 2rem
 		border-radius: 1rem
+		z-index: 10
 
 	h1
 		color: $text
@@ -88,10 +89,6 @@
 		line-height: 20px
 		letter-spacing: 0.5px
 		margin: 20px 0 30px
-
-	span
-		font-size: 12px
-		color: $text
 
 	.forgpass
 		color: $text
@@ -187,16 +184,16 @@
 		left: 0
 		border-radius: 0.5rem 0 0 0.5rem
 
-	.social-container
-		margin: 20px 0
+	// .social-container
+	// 	margin: 20px 0
 
-	.social-container a
-		border: 1px solid #121212
-		border-radius: 50%
-		display: inline-flex
-		justify-content: center
-		align-items: center
-		margin: 0 5px
-		height: 40px
-		width: 40px
+	// 	a
+	// 		border: 1px solid #121212
+	// 		border-radius: 50%
+	// 		display: inline-flex
+	// 		justify-content: center
+	// 		align-items: center
+	// 		margin: 0 5px
+	// 		height: 40px
+	// 		width: 40px
 </style>

@@ -10,7 +10,10 @@
 </script>
 
 <header>
-	<h1>BidWave</h1>
+	<div class="title">
+		<img src="transparent.svg" />
+		<h1>BidWave</h1>
+	</div>
 	<nav>
 		<button on:click={() => goto('/auth')} class="login-button">Login</button>
 	</nav>
@@ -23,24 +26,34 @@
 </footer>
 
 <style lang="sass">
-	@import '../vars'
+	@use '../vars'
 
 	:global(body)
-		background-color: $primary
+		background-color: vars.$primary
 
 	header
 		position: fixed
 		top: 0
 		width: 100vw
-		background-color: $primary
+		background-color: vars.$primary
 		display: flex
 		justify-content: space-between
 		align-items: center
 		padding: 20px
 		color: var(--secondary-color)
 
-		h1
-			color: $text
+		.title
+			display: flex
+			flex-direction: row
+			align-items: center
+			gap: 1rem
+
+			img
+				width: 2rem
+				height: 2rem
+
+			h1
+				color: vars.$text
 
 		nav
 			display: flex
@@ -50,8 +63,8 @@
 				padding: 10px 20px
 				border: none
 				border-radius: 20px
-				background-color: $accent
-				color: $inverted
+				background-color: vars.$accent
+				color: vars.$inverted
 				font-weight: bold
 				cursor: pointer
 
@@ -63,11 +76,11 @@
 		justify-content: center
 		align-items: center
 		padding: 20px
-		background-color: $accent
+		background-color: vars.$accent
 
 		.social-link
 			margin: 0 10px
-			color: $text
+			color: vars.$text
 			text-decoration: none
 			font-weight: bold
 </style>

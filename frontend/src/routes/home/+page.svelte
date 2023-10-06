@@ -8,11 +8,11 @@
     <div class="container">
         {#each products as product}
             <div class="product">
-                <img src="f1.jpg" alt="">
+                <img src="https://cdn-images.farfetch-contents.com/13/77/09/62/13770962_17126919_1000.jpg" alt="">
                 <div class="description">
                     <span class="category">Clothes</span>
                     <h5 class="title">Astronaut T-shirts</h5>
-                    <h4 class="price">$78</h4>
+                    <h4 class="price">$100</h4>
                 </div>
             </div>
         {/each}
@@ -44,14 +44,12 @@ section
             width: 23%
             min-width: 250px
             padding: 10px 12px
-            border: 1px solid vars.$text
             border-radius: 25px
             cursor: pointer
-            box-shadow: 20px 20px 30px rgba( 0, 0, 0, 0.02)
-            transition: 0.2s ease
+            transition: 0.2s
 
             &:hover
-                box-shadow: 2px 2px 10px vars.$text
+                box-shadow: 2px 2px 10px vars.$accent
 
             img
                 width: 100%

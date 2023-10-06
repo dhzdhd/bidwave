@@ -16,7 +16,7 @@
 		<h1>BidWave</h1>
 	</a>
 	<nav>
-		<button on:click={() => goto('/auth')} class="login-button">Login</button>
+		<button on:click={async () => await goto('/auth')} class="login-button">Login</button>
 	</nav>
 </header>
 <main>

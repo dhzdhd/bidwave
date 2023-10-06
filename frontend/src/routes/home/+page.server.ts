@@ -1,3 +1,4 @@
+import { error, fail } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 const apiUrl = 'http://localhost:1337/api';
@@ -31,8 +32,11 @@ export const load: PageServerLoad = async ({ cookies }) => {
 			Authorization: `Bearer ${cookies.get('sessionjwt')}`
 		}
 	});
-
 	const json = await response.json();
+
+	if (response.status !== 200) {
+		throw error(response.status, { message: 'Unauthorized' });
+	}
 
 	return {
 		products: json.data.map((e: any) => {

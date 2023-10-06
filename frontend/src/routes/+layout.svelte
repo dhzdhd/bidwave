@@ -11,10 +11,10 @@
 </script>
 
 <header>
-	<div class="title">
+	<a class="title" href="/">
 		<img src="transparent.svg" alt="logo" />
 		<h1>BidWave</h1>
-	</div>
+	</a>
 	<nav>
 		<button on:click={() => goto('/auth')} class="login-button">Login</button>
 	</nav>
@@ -48,6 +48,7 @@
 			flex-direction: row
 			align-items: center
 			gap: 1rem
+			text-decoration: none
 
 			img
 				width: 2rem

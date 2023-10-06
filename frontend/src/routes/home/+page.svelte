@@ -2,8 +2,6 @@
 	import type { Product } from './+page.server';
 
 	export let data: { products: Product[] };
-
-	console.log(data.products[0].image.url);
 </script>
 
 <section>
@@ -11,7 +9,7 @@
 	<div class="container">
 		{#each data.products as product}
 			<div class="product">
-				<img src={product.image.url} alt="" />
+				<img src={product.image.url} alt={product.image.alt} />
 				<div class="description">
 					<span class="category">Clothes</span>
 					<h5 class="title">{product.name}</h5>

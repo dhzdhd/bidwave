@@ -26,8 +26,10 @@
 @use '../../vars'
 
 section
+    min-height: 100vh
     display: flex
     flex-direction: column
+    flex-grow: 1
     gap: 1rem
     align-items: center
     padding: 5rem 2rem

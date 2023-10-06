@@ -40,7 +40,7 @@
 		display: flex
 		justify-content: space-between
 		align-items: center
-		padding: 20px
+		padding: 1rem 2rem
 		color: var(--secondary-color)
 
 		.title
@@ -70,8 +70,8 @@
 				cursor: pointer
 
 	footer
-		position: fixed
-		width: 100vw
+		position: relative
+		max-width: 100vw
 		bottom: 0
 		display: flex
 		justify-content: center

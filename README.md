@@ -2,16 +2,6 @@
 
 A realtime auction platform built on SvelteKit and Strapi
 
-## Roles
-
-- Backend
-  - Sagar
-  - Srinivas
-- Frontend
-  - Sourabhgagan
-  - Anagha
-  - Tanisha
-
 ## Synopsis structure
 
 - Title

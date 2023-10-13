@@ -8,20 +8,21 @@
 	<h1>Featured Products</h1>
 	<div class="container">
 		{#each data.products as product}
-			<div class="product">
+			<button class="product">
 				<img src={product.image.url} alt={product.image.alt} />
 				<div class="description">
 					<span class="category">Clothes</span>
 					<h5 class="title">{product.name}</h5>
 					<h4 class="price">${product.bidPrice}</h4>
 				</div>
-			</div>
+			</button>
 		{/each}
 	</div>
 </section>
 
 <style lang="sass">
 @use '../../vars'
+@use 'sass:color'
 
 section
     min-height: 100vh
@@ -51,6 +52,8 @@ section
             place-self: center
             cursor: pointer
             transition: 0.2s
+            border: none
+            background: linear-gradient(180deg, transparentize(white, 0.96) 0%, transparentize(vars.$accent, 0.9)  100%)
 
             &:hover
                 box-shadow: 2px 2px 10px vars.$accent

@@ -6,6 +6,7 @@
 	export let data;
 	let rzp;
 
+	// TODO Implement payment cancel functions
 	onMount(() => {
 		const options = {
 			key: PUBLIC_KEY_ID,
@@ -21,8 +22,6 @@
 	});
 
 	function openCheckout() {
-		console.log('ejfefef');
-
 		rzp!.open();
 	}
 </script>
@@ -32,7 +31,7 @@
 </svelte:head>
 
 <div class="payment-container">
-	<h1>Payment</h1>
+	<h1>Payment Checkout</h1>
 
 	<img src="" alt="item" />
 	<div class="desc-container">
@@ -60,10 +59,4 @@
 
 		.desc-container
 			padding: 2rem 1rem
-
-		#rzp
-			height: 1rem
-			width: 1rem
-			cursor: pointer
-			margin: 3rem
 </style>

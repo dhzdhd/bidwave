@@ -38,6 +38,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@vitest/ui": "^0.34.3"
+		"@vitest/ui": "^0.34.3",
+		"razorpay": "^2.9.2"
 	}
 }

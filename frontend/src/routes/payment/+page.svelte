@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
-	
+
 	async function makePayment() {
-	
+		console.log('hi');
 	}
 </script>
 
@@ -14,7 +14,7 @@
 		<p>Item: Cloth</p>
 		<p>Price: $5</p>
 	</div>
-	
+
 	<Button func={makePayment} text="Make Payment" />
 </div>
 

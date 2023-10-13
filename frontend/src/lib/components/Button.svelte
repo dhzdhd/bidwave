@@ -1,9 +1,10 @@
 <script lang="ts">
-    export let func: () => void;
-    export let text: string;
+	export let id: string | undefined = undefined;
+	export let func: () => void;
+	export let text: string;
 </script>
 
-<button on:click={func}>{text}</button>
+<button {id} on:click={func}>{text}</button>
 
 <style lang="sass">
     @use '../../vars'

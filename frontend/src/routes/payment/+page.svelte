@@ -1,21 +1,46 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
+	import { onMount } from 'svelte';
+	import { PUBLIC_KEY_ID } from '$env/static/public';
 
-	async function makePayment() {
-		console.log('hi');
+	export let data;
+	let rzp;
+
+	onMount(() => {
+		const options = {
+			key: PUBLIC_KEY_ID,
+			amount: '50000',
+			currency: 'INR',
+			name: 'BidWave',
+			order_id: data.id,
+			theme: {
+				color: '#725bdb'
+			}
+		};
+		rzp = new Razorpay(options);
+	});
+
+	function openCheckout() {
+		console.log('ejfefef');
+
+		rzp!.open();
 	}
 </script>
+
+<svelte:head>
+	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</svelte:head>
 
 <div class="payment-container">
 	<h1>Payment</h1>
 
-	<img src="" />
+	<img src="" alt="item" />
 	<div class="desc-container">
 		<p>Item: Cloth</p>
 		<p>Price: $5</p>
 	</div>
 
-	<Button func={makePayment} text="Make Payment" />
+	<Button id="rzp" func={openCheckout} text="Make Payment" />
 </div>
 
 <style lang="sass">
@@ -35,4 +60,10 @@
 
 		.desc-container
 			padding: 2rem 1rem
+
+		#rzp
+			height: 1rem
+			width: 1rem
+			cursor: pointer
+			margin: 3rem
 </style>

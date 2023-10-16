@@ -11,6 +11,13 @@
 
 <section>
 	<h1>Featured Products</h1>
+	<div class="search-container">
+		<select class="search-select">
+			<option>All</option>
+		</select>
+		<input placeholder="Search Product" class="search-input" />
+		<button class="search-btn">Go</button>
+	</div>
 	<div class="container">
 		{#each data.products as product}
 			<button on:click={async () => await navigate(product)} class="product">
@@ -43,6 +50,32 @@ section
     h1
         font-size: 2rem
         color: vars.$text
+
+    .search-container
+        display: flex
+        justify-content: center
+        height: 2rem
+
+        .search-select
+            background-color: vars.$accent
+            color: vars.$inverted
+            border-color: vars.$accent
+            border-radius: 0.3rem 0rem 0rem 0.3rem
+
+        .search-input
+            padding: 0rem 0.3rem
+            background-color: transparent
+            color: vars.$text
+            border: 1px solid
+            border-color: vars.$accent
+
+        .search-btn
+            background-color: vars.$accent
+            color: vars.$inverted
+            width: 2rem
+            border: none
+            border-radius: 0rem 0.3rem 0.3rem 0rem
+            cursor: pointer
 
     .container
         display: grid

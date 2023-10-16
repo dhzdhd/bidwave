@@ -9,17 +9,38 @@
 	const navigate = async (product: Product) => {
 		await goto(`/home/${product.id}`);
 	};
+
+	let currentCategory = 0;
+	let searchValue = '';
+
+	$: setProducts(searchValue, currentCategory);
+
+	function setProducts(input: string, category: number) {
+		let tempProducts = data.products;
+		if (category !== 0) {
+			tempProducts = tempProducts.filter((e) => {
+				return e.category === categories[category];
+			});
+		}
+		if (input.trim() !== '') {
+			tempProducts = tempProducts.filter((e) => {
+				return e.name.includes(input);
+			});
+		}
+
+		products = tempProducts;
+	}
 </script>
 
 <section>
 	<h1>Featured Products</h1>
 	<div class="search-container">
-		<select class="search-select">
-			{#each categories as category}
-				<option>{category}</option>
+		<select bind:value={currentCategory} class="search-select">
+			{#each categories as category, i}
+				<option value={i}>{category}</option>
 			{/each}
 		</select>
-		<input placeholder="Search Product" class="search-input" />
+		<input bind:value={searchValue} placeholder="Search Product" class="search-input" />
 		<button class="search-btn">Go</button>
 	</div>
 	<div class="container">

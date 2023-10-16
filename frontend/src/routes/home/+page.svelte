@@ -2,7 +2,9 @@
 	import { goto } from '$app/navigation';
 	import type { Product } from './+layout.server';
 
-	export let data: { products: Product[] };
+	export let data: { products: Product[]; categories: string[] };
+	let products = data.products;
+	let categories = ['All', ...data.categories];
 
 	const navigate = async (product: Product) => {
 		await goto(`/home/${product.id}`);
@@ -13,13 +15,15 @@
 	<h1>Featured Products</h1>
 	<div class="search-container">
 		<select class="search-select">
-			<option>All</option>
+			{#each categories as category}
+				<option>{category}</option>
+			{/each}
 		</select>
 		<input placeholder="Search Product" class="search-input" />
 		<button class="search-btn">Go</button>
 	</div>
 	<div class="container">
-		{#each data.products as product}
+		{#each products as product}
 			<button on:click={async () => await navigate(product)} class="product">
 				<img src={product.image.url} alt={product.image.alt} />
 				<div class="description">

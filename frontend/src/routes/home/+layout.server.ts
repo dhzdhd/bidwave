@@ -15,6 +15,7 @@ export interface Product {
 	description: string;
 	available: boolean;
 	image: Image;
+	category: string;
 }
 
 export interface Image {
@@ -26,20 +27,28 @@ export interface Image {
 }
 
 export const load: LayoutServerLoad = async ({ cookies }) => {
-	const response = await fetch(`${apiUrl}/products?populate=*`, {
+	const productResp = await fetch(`${apiUrl}/products?populate=*`, {
 		method: 'GET',
 		headers: {
 			Authorization: `Bearer ${cookies.get('sessionjwt')}`
 		}
 	});
-	const json = await response.json();
+	const productJson = await productResp.json();
 
-	if (response.status !== 200) {
-		throw error(response.status, { message: 'Unauthorized' });
+	const categoryResp = await fetch(`${apiUrl}/categories?populate=*`, {
+		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${cookies.get('sessionjwt')}`
+		}
+	});
+	const categoryJson = await categoryResp.json();
+
+	if (productResp.status !== 200 || categoryResp.status !== 200) {
+		throw error(productResp.status, { message: 'Unauthorized' });
 	}
 
 	return {
-		products: json.data.map((e: any) => {
+		products: productJson.data.map((e: any) => {
 			const rawImage = e['attributes']['image']['data'][0]['attributes'];
 
 			return {
@@ -52,6 +61,7 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
 				amount: e['attributes']['number'],
 				description: e['attributes']['description'],
 				available: e['attributes']['available'],
+				category: e['attributes']['category']['data']['attributes']['name'],
 				image: {
 					alt: rawImage['name'],
 					width: rawImage['width'],
@@ -60,6 +70,9 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
 					url: `${url}${rawImage['url']}`
 				} satisfies Image
 			} satisfies Product;
+		}),
+		categories: categoryJson.data.map((e: any) => {
+			return e['attributes']['name'];
 		})
-	} satisfies { products: Product[] };
+	} satisfies { products: Product[]; categories: string[] };
 };

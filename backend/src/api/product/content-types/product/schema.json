@@ -59,6 +59,12 @@
       "relation": "oneToMany",
       "target": "api::bid.bid",
       "mappedBy": "product"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "products"
     }
   }
 }

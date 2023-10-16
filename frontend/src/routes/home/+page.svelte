@@ -32,6 +32,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Home | BidWave</title>
+</svelte:head>
+
 <section>
 	<h1>Featured Products</h1>
 	<div class="search-container">

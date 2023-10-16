@@ -2,6 +2,10 @@
 	import '../global.sass';
 </script>
 
+<svelte:head>
+	<title>BidWave</title>
+</svelte:head>
+
 <main>
 	<h2>Welcome to <span>BidWave</span></h2>
 	<p>Find the best deals on the items you love.</p>

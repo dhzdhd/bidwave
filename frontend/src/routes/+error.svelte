@@ -3,6 +3,10 @@
 	import { page } from '$app/stores';
 </script>
 
+<svelte:head>
+	<title>{$page.status} | BidWave</title>
+</svelte:head>
+
 <div>
 	<h1>{$page.status}</h1>
 	<h2>{$page.error?.message}</h2>

@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Auth | BidWave</title>
+</svelte:head>
+
 <div class="body">
 	<slot />
 </div>

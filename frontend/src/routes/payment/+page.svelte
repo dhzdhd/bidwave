@@ -27,6 +27,7 @@
 </script>
 
 <svelte:head>
+	<title>Payment | BidWave</title>
 	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </svelte:head>
 

@@ -20,7 +20,7 @@
 		<nav>
 			<button on:click={async () => await goto('/auth')} class="login-button">Login</button>
 		</nav>
-	{:else if $page.url.pathname !== '/auth'}
+	{:else if !$page.url.pathname.includes('/auth')}
 		<nav>
 			<ul>
 				<li><a href="/home">Home</a></li>

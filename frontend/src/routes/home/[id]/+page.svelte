@@ -13,6 +13,10 @@
 	const seconds = remaining.seconds();
 </script>
 
+<svelte:head>
+	<title>{data.name} | BidWave</title>
+</svelte:head>
+
 <section>
 	<h1>{data.name}</h1>
 	<img src={data.image.url} id="img" alt={data.image.alt} />

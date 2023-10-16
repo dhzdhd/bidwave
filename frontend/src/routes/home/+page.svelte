@@ -1,14 +1,19 @@
 <script lang="ts">
-	import type { Product } from './+page.server';
+	import { goto } from '$app/navigation';
+	import type { Product } from './+layout.server';
 
 	export let data: { products: Product[] };
+
+	const navigate = async (product: Product) => {
+		await goto(`/home/${product.id}`);
+	};
 </script>
 
 <section>
 	<h1>Featured Products</h1>
 	<div class="container">
 		{#each data.products as product}
-			<button class="product">
+			<button on:click={async () => await navigate(product)} class="product">
 				<img src={product.image.url} alt={product.image.alt} />
 				<div class="description">
 					<span class="category">Clothes</span>

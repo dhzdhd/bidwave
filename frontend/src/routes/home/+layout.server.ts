@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
+import type { LayoutServerLoad } from './$types';
 
 const apiUrl = 'http://localhost:1337/api';
 const url = 'http://localhost:1337';
@@ -25,7 +25,7 @@ export interface Image {
 	url: string;
 }
 
-export const load: PageServerLoad = async ({ cookies }) => {
+export const load: LayoutServerLoad = async ({ cookies }) => {
 	const response = await fetch(`${apiUrl}/products?populate=*`, {
 		method: 'GET',
 		headers: {

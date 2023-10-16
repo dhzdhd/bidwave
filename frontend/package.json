@@ -39,6 +39,7 @@
 	"type": "module",
 	"dependencies": {
 		"@vitest/ui": "^0.34.3",
+		"moment": "^2.29.4",
 		"razorpay": "^2.9.2"
 	}
 }

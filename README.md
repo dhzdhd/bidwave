@@ -61,4 +61,11 @@ A realtime auction platform built on SvelteKit and Strapi
 
 - `cd frontend`
 - `npm install`
+- Create a file named `.env`
+- Populate `.env` file as per `.env-example` file (copy-paste)
+- Change the following variables in `.env` file
+  - KEY_ID - RazorPay key ID
+  - PUBLIC_KEY_ID - Same as KEY_ID
+  - KEY_SECRET - RazorPay key secret
+  - PUBLIC_CMS_URL - the URL of the CMS (defaults to localhost if left blank)
 - `npm run dev`

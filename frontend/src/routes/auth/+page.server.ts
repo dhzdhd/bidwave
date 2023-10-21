@@ -1,7 +1,8 @@
 import { fail } from '@sveltejs/kit';
 import type { Actions } from './$types';
+import { CMS_URL } from '$lib/constants';
 
-const apiUrl = 'http://localhost:1337/api';
+const apiUrl = `${CMS_URL}/api`;
 
 export const actions = {
 	login: async ({ cookies, request }) => {

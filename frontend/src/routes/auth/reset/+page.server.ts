@@ -1,5 +1,6 @@
 import { fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
+import { CMS_URL } from '$lib/constants';
 
 export const load: PageServerLoad = async ({ url, cookies }) => {
 	const code = url.searchParams.get('code');
@@ -25,7 +26,7 @@ export const actions = {
 		}
 
 		try {
-			const resp = await fetch('http://localhost:1337/api/auth/reset-password', {
+			const resp = await fetch(`${CMS_URL}/api/auth/reset-password`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ code, password, passwordConfirmation })

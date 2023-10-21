@@ -1,8 +1,9 @@
 import { error } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
+import { CMS_URL } from '$lib/constants';
 
-const apiUrl = 'http://localhost:1337/api';
-const url = 'http://localhost:1337';
+const apiUrl = `${CMS_URL}/api`;
+const url = CMS_URL;
 
 export interface Product {
 	id: number;

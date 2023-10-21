@@ -1,5 +1,6 @@
 import { fail } from '@sveltejs/kit';
 import type { Actions } from './$types';
+import { CMS_URL } from '$lib/constants';
 
 export const actions = {
 	default: async ({ request }) => {
@@ -11,7 +12,7 @@ export const actions = {
 		}
 
 		try {
-			const resp = await fetch('http://localhost:1337/api/auth/forgot-password', {
+			const resp = await fetch(`${CMS_URL}/api/auth/forgot-password`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ email })

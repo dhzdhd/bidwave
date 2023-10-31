@@ -12,7 +12,6 @@ export interface Product {
 	auctionStart: string;
 	price: number;
 	bidPrice: number;
-	amount: number;
 	description: string;
 	available: boolean;
 	image: Image;
@@ -59,7 +58,6 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
 				auctionStart: e['attributes']['auction_start'],
 				price: e['attributes']['price'],
 				bidPrice: e['attributes']['bid_price'],
-				amount: e['attributes']['number'],
 				description: e['attributes']['description'],
 				available: e['attributes']['available'],
 				category: e['attributes']['category']['data']['attributes']['name'],

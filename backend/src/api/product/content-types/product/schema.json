@@ -35,10 +35,6 @@
         "audios"
       ]
     },
-    "number": {
-      "type": "decimal",
-      "required": true
-    },
     "bid_price": {
       "type": "biginteger",
       "required": true

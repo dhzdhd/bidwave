@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import { fade, fly } from 'svelte/transition';
 
-	let isSignIn = false;
+	let isSignIn = true;
 	let email = '';
 	let password = '';
 	let name = '';
@@ -22,7 +22,7 @@
 	};
 </script>
 
-<div in:fly={{ y: 200 }} class="container" id="container">
+<div in:fly|local={{ y: 200 }} class="container" id="container">
 	<div class="form-container {isSignIn ? 'sign-in-container' : 'sign-up-container'}">
 		<form method="POST" action={isSignIn ? '?/login' : '?/register'} use:enhance>
 			<h1>{isSignIn ? 'Sign In' : 'Create Account'}</h1>

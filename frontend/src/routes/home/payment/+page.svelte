@@ -2,6 +2,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import { onMount } from 'svelte';
 	import { PUBLIC_KEY_ID } from '$env/static/public';
+	import { page } from '$app/stores';
 
 	export let data;
 	let rzp;
@@ -34,17 +35,17 @@
 <div class="payment-container">
 	<h1>Payment Checkout</h1>
 
-	<img src="" alt="item" />
+	<img src={data.product.image.url} alt={data.product.image.alt} />
 	<div class="desc-container">
-		<p>Item: Cloth</p>
-		<p>Price: $5</p>
+		<p>Item: {data.product.name}</p>
+		<p>Price: ${data.product.bidPrice}</p>
 	</div>
 
 	<Button id="rzp" func={openCheckout} text="Make Payment" />
 </div>
 
 <style lang="sass">
-	@use '../../vars'
+	@use '../../../vars'
 
 	.payment-container
 		display: flex

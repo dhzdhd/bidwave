@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import '../global.sass';
+	import * as cookie from 'cookie';
 
 	const socialLinks = [
 		{ name: 'Facebook', url: 'https://www.facebook.com/' },
@@ -9,6 +10,10 @@
 		{ name: 'Instagram', url: 'https://www.instagram.com/' },
 		{ name: 'LinkedIn', url: 'https://www.linkedin.com/' }
 	];
+
+	const signOut = async () => {
+		await goto('/');
+	};
 </script>
 
 <header>
@@ -24,6 +29,11 @@
 		<nav>
 			<ul>
 				<li><a href="/home">Home</a></li>
+				<li>
+					<form method="POST" action="/">
+						<button on:click={signOut} type="submit">Sign out</button>
+					</form>
+				</li>
 			</ul>
 		</nav>
 	{/if}
@@ -82,6 +92,11 @@
 				cursor: pointer
 
 			ul
+				display: flex
+				flex-direction: row
+				gap: 2rem
+				align-items: center
+
 				li
 					list-style: none
 

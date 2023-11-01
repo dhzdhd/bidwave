@@ -6,12 +6,10 @@ const {
   validateCallbackBody,
   validateRegisterBody,
   validateSendEmailConfirmationBody,
-} = require("../../../node_modules/@strapi/plugin-users-permissions/server/controllers/validation/auth");
+} = require("@strapi/plugin-users-permissions/server/controllers/validation/auth");
 
 const utils = require("@strapi/utils");
-const {
-  getService,
-} = require("../../../node_modules/@strapi/plugin-users-permissions/server/utils");
+const { getService } = require("@strapi/plugin-users-permissions/server/utils");
 
 const { getAbsoluteAdminUrl, getAbsoluteServerUrl, sanitize } = utils;
 const { ApplicationError, ValidationError } = utils.errors;

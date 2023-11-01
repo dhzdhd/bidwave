@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import '../global.sass';
-	import * as cookie from 'cookie';
+	import logo from '$lib/assets/transparent.svg';
 
 	const socialLinks = [
 		{ name: 'Facebook', url: 'https://www.facebook.com/' },
@@ -18,7 +18,7 @@
 
 <header>
 	<a class="title" href="/">
-		<img src="transparent.svg" alt="logo" />
+		<img src={logo} alt="logo" />
 		<h1>BidWave</h1>
 	</a>
 	{#if $page.url.pathname === '/'}

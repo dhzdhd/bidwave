@@ -40,6 +40,7 @@
 	"dependencies": {
 		"@vitest/ui": "^0.34.3",
 		"moment": "^2.29.4",
-		"razorpay": "^2.9.2"
+		"razorpay": "^2.9.2",
+		"socket.io-client": "^4.7.2"
 	}
 }

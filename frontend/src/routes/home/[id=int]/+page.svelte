@@ -1,15 +1,22 @@
 <script lang="ts">
-	import moment from 'moment';
+	import moment, { type Duration } from 'moment';
 	export let data;
 
 	const time = moment.parseZone(data.auctionEnd, moment.ISO_8601);
 	const now = moment();
-	const remaining = moment.duration(time.diff(now));
+	let remaining = moment.duration(time.diff(now));
 
-	const days = remaining.days();
-	const hours = remaining.hours();
-	const minutes = remaining.minutes();
-	const seconds = remaining.seconds();
+	const calcTime = () => {
+		const now = moment();
+		remaining = moment.duration(time.diff(now));
+
+		const days = remaining.days();
+		const hours = remaining.hours();
+		const minutes = remaining.minutes();
+		const seconds = remaining.seconds();
+	};
+
+	setInterval(calcTime, 1000);
 </script>
 
 <svelte:head>
@@ -23,13 +30,13 @@
 		<h2 class="price">${data.bidPrice}</h2>
 		<div class="timer">
 			<span>
-				{days} days
+				{remaining.days()} days
 			</span>
-			<span class="__timer" id="hours">{hours}</span>
+			<span class="__timer" id="hours">{remaining.hours()}</span>
 			<span class="__timer-label">hr</span>
-			<span class="__timer" id="minutes">{minutes}</span>
+			<span class="__timer" id="minutes">{remaining.minutes()}</span>
 			<span class="__timer-label">min</span>
-			<span class="__timer" id="seconds">{seconds}</span>
+			<span class="__timer" id="seconds">{remaining.seconds()}</span>
 			<span class="__timer-label">sec</span>
 		</div>
 		<h4>Product Details</h4>

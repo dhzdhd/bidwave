@@ -4,24 +4,36 @@
 	import moment from 'moment';
 	import socketIOClient, { Socket } from 'socket.io-client';
 	import { onMount } from 'svelte';
+	import type { Image, Product } from '../+layout.server.js';
 	export let data;
 
 	let product = data.product;
-
-	let serverTime: any;
 	let socket: Socket;
+	let currentBid: number = 0;
 
-	onMount(() => {
-		socket = socketIOClient(CMS_URL, { query: { token: data.token } });
-		socket.emit('loadBids', { id: product.id });
-		socket.on('loadBids', (data: any) => {
-			console.log(data);
-		});
-	});
+	const updateProduct = (data: any) => {
+		const rawImage = data['attributes']['image']['data'][0]['attributes'];
+		const newProduct = {
+			id: data['id'],
+			name: data['attributes']['name'],
+			auctionEnd: data['attributes']['auction_end'],
+			auctionStart: data['attributes']['auction_start'],
+			price: data['attributes']['price'],
+			bidPrice: data['attributes']['bid_price'],
+			description: data['attributes']['description'],
+			available: data['attributes']['available'],
+			category: data['attributes']['category']['data']['attributes']['name'],
+			image: {
+				alt: rawImage['name'],
+				width: rawImage['width'],
+				height: rawImage['height'],
+				mime: rawImage['mime'],
+				url: `${CMS_URL}${rawImage['url']}`
+			} satisfies Image
+		} satisfies Product;
 
-	const time = moment.parseZone(product.auctionEnd, moment.ISO_8601);
-	const now = moment();
-	let remaining = moment.duration(time.diff(now));
+		product = newProduct;
+	};
 
 	const calcTime = () => {
 		const now = moment();
@@ -35,11 +47,23 @@
 
 	const makeBid = () => {
 		socket.emit('makeBid', {
-			bidValue: product.bidPrice,
+			bidValue: currentBid,
 			product: product.id
 			// user: user.id, TODO:
 		});
 	};
+
+	onMount(() => {
+		socket = socketIOClient(CMS_URL, { query: { token: data.token } });
+		socket.emit('loadBids', { id: product.id });
+		socket.on('loadBids', (data: any) => {
+			console.log(data);
+		});
+	});
+
+	const time = moment.parseZone(product.auctionEnd, moment.ISO_8601);
+	const now = moment();
+	let remaining = moment.duration(time.diff(now));
 
 	setInterval(calcTime, 1000);
 </script>
@@ -67,7 +91,7 @@
 		<h4>Product Details</h4>
 		<span>{product.description}</span>
 	</div>
-	<input type="number" />
+	<input bind:value={currentBid} type="number" />
 	<Button id="bid-btn" text="Make Bid" func={makeBid} />
 </section>
 

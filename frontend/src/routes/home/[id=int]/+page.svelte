@@ -1,19 +1,22 @@
 <script lang="ts">
-	import { preloadData } from '$app/navigation';
 	import Button from '$lib/components/Button.svelte';
 	import { CMS_URL } from '$lib/constants.js';
-	import moment, { type Duration } from 'moment';
-	import socketIOClient from 'socket.io-client';
+	import moment from 'moment';
+	import socketIOClient, { Socket } from 'socket.io-client';
+	import { onMount } from 'svelte';
 	export let data;
 
 	let product = data.product;
 
 	let serverTime: any;
+	let socket: Socket;
 
-	const socket = socketIOClient(CMS_URL, { query: { token: data.token } });
-
-	socket.emit('loadBids', { id: product.id }).on('loadBids', (data) => {
-		console.log(data);
+	onMount(() => {
+		socket = socketIOClient(CMS_URL, { query: { token: data.token } });
+		socket.emit('loadBids', { id: product.id });
+		socket.on('loadBids', (data: any) => {
+			console.log(data);
+		});
 	});
 
 	const time = moment.parseZone(product.auctionEnd, moment.ISO_8601);

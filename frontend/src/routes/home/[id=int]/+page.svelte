@@ -4,7 +4,7 @@
 	import moment from 'moment';
 	import socketIOClient, { Socket } from 'socket.io-client';
 	import { onMount } from 'svelte';
-	import type { Image, Product } from '../+layout.server.js';
+	import type { Product } from '../+layout.server.js';
 	export let data;
 
 	let product = data.product;
@@ -12,24 +12,9 @@
 	let currentBid: number = 0;
 
 	const updateProduct = (data: any) => {
-		const rawImage = data['attributes']['image']['data'][0]['attributes'];
 		const newProduct = {
-			id: data['id'],
-			name: data['attributes']['name'],
-			auctionEnd: data['attributes']['auction_end'],
-			auctionStart: data['attributes']['auction_start'],
-			price: data['attributes']['price'],
-			bidPrice: data['attributes']['bid_price'],
-			description: data['attributes']['description'],
-			available: data['attributes']['available'],
-			category: data['attributes']['category']['data']['attributes']['name'],
-			image: {
-				alt: rawImage['name'],
-				width: rawImage['width'],
-				height: rawImage['height'],
-				mime: rawImage['mime'],
-				url: `${CMS_URL}${rawImage['url']}`
-			} satisfies Image
+			...product,
+			bidPrice: data['bid_price']
 		} satisfies Product;
 
 		product = newProduct;
@@ -38,11 +23,6 @@
 	const calcTime = () => {
 		const now = moment();
 		remaining = moment.duration(time.diff(now));
-
-		const days = remaining.days();
-		const hours = remaining.hours();
-		const minutes = remaining.minutes();
-		const seconds = remaining.seconds();
 	};
 
 	const makeBid = () => {
@@ -58,6 +38,8 @@
 		socket.emit('loadBids', { id: product.id });
 		socket.on('loadBids', (data: any) => {
 			console.log(data);
+
+			updateProduct(data);
 		});
 	});
 

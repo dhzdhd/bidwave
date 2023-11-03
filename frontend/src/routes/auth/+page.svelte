@@ -22,6 +22,8 @@
 	};
 </script>
 
+<!-- TODO: Save user id to a writeable through form response -->
+
 <div in:fly|local={{ y: 200 }} class="container" id="container">
 	<div class="form-container {isSignIn ? 'sign-in-container' : 'sign-up-container'}">
 		<form method="POST" action={isSignIn ? '?/login' : '?/register'} use:enhance>

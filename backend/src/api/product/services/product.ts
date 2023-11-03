@@ -7,28 +7,34 @@ import { factories } from "@strapi/strapi";
 export default factories.createCoreService(
   "api::product.product",
   ({ strapi }) => ({
-    loadBids(id) {
-      return strapi.entityService.findOne("api::product.product", id, {
-        fields: "*",
-        populate: {
-          bids: {
-            limit: 5,
-            sort: "createdAt:desc",
-            populate: {
-              account: {
-                fields: ["id"],
-                populate: {
-                  user: {
-                    fields: ["username"],
+    async loadProducts(id) {
+      let product = await strapi.entityService.findOne(
+        "api::product.product",
+        id,
+        {
+          fields: "*",
+          populate: {
+            bids: {
+              limit: 5,
+              sort: "createdAt:desc",
+              populate: {
+                account: {
+                  fields: ["id"],
+                  populate: {
+                    user: {
+                      fields: ["username"],
+                    },
                   },
                 },
               },
             },
-          },
 
-          image: true,
-        },
-      });
+            image: true,
+          },
+        }
+      );
+
+      return product;
     },
 
     async findAndUpdateBidPrice(found, price) {

@@ -32,15 +32,16 @@ export default factories.createCoreService("api::bid.bid", ({ strapi }) => ({
     }
   },
 
-  getWinner(params) {
-    const bids = strapi.service("api::bid.bid").findMany({
-      fields: ["user", "value"],
-      filters: { product: params.product },
-      sort: { value: "DESC" },
+  async loadBids(id) {
+    const bids = await strapi.entityService.findMany("api::bid.bid", {
+      filters: { product: id },
+      populate: { user: true },
     });
 
-    console.log(bids);
+    const response = { value: bids[0].value, user: bids[0].user.id };
 
-    return bids;
+    console.log(response);
+
+    return response;
   },
 }));

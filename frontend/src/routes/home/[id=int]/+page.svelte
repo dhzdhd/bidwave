@@ -10,6 +10,11 @@
 	let product = data.product;
 	let socket: Socket;
 	let currentBid: number = 0;
+	let isWinner: boolean = false;
+
+	const time = moment.parseZone(product.auctionEnd, moment.ISO_8601);
+	const now = moment();
+	let remaining = moment.duration(time.diff(now));
 
 	const updateProduct = (data: any) => {
 		const newProduct = {
@@ -23,6 +28,11 @@
 	const calcTime = () => {
 		const now = moment();
 		remaining = moment.duration(time.diff(now));
+
+		if (now.isSameOrAfter(time)) {
+			socket.disconnect();
+			product.available = false;
+		}
 	};
 
 	const makeBid = () => {
@@ -37,17 +47,18 @@
 
 	onMount(() => {
 		socket = socketIOClient(CMS_URL, { query: { token: data.token } });
-		socket.emit('loadBids', { id: product.id });
-		socket.on('loadBids', (data: any) => {
+		socket.emit('loadProducts', { id: product.id });
+		socket.on('loadProducts', (data: any) => {
 			console.log(data);
 
 			updateProduct(data);
 		});
-	});
 
-	const time = moment.parseZone(product.auctionEnd, moment.ISO_8601);
-	const now = moment();
-	let remaining = moment.duration(time.diff(now));
+		socket.on('loadBids', (data: any) => {
+			isWinner = Number(data.user) === 0;
+			// TODO: Get user id from writable made in login page
+		});
+	});
 
 	setInterval(calcTime, 1000);
 </script>
@@ -77,6 +88,10 @@
 	</div>
 	<input bind:value={currentBid} type="number" />
 	<Button id="bid-btn" text="Make Bid" func={makeBid} />
+
+	{#if !product.available}
+		<h1>Auction ended!</h1>
+	{/if}
 </section>
 
 <style lang="sass">

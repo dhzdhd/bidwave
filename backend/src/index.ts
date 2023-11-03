@@ -22,12 +22,15 @@ module.exports = {
     verify(token)
 
     */
+    let interval;
+
     var io = require("socket.io")(strapi.server.httpServer, {
       cors: {
         origin: "*",
         methods: ["GET", "POST"],
       },
     });
+
     io.use(async (socket, next) => {
       try {
         //Socket Authentication
@@ -44,15 +47,24 @@ module.exports = {
     }).on("connection", function (socket) {
       console.log("a user connected");
 
-      socket.on("loadBids", async (data) => {
+      if (interval) {
+        clearInterval(interval);
+      }
+
+      interval = setInterval(() => {
+        io.emit("serverTime", { time: new Date().getTime() });
+      }, 1000);
+
+      socket.on("loadProducts", async (data) => {
         // id: product id
         let params = data;
 
         try {
           let data = await strapi
             .service("api::product.product")
-            .loadBids(params.id);
-          io.emit("loadBids", data);
+            .loadProducts(params.id);
+
+          io.emit("loadProducts", data);
         } catch (error) {
           console.log(error);
         }
@@ -82,9 +94,14 @@ module.exports = {
 
           let updatedProduct = await strapi
             .service("api::product.product")
+            .loadProducts(product.id);
+
+          let updatedBid = await strapi
+            .service("api::bid.bid")
             .loadBids(product.id);
 
-          io.emit("loadBids", updatedProduct);
+          io.emit("loadProducts", updatedProduct);
+          io.emit("loadBids", updatedBid);
         } catch (error) {
           console.log(error);
         }
@@ -92,8 +109,10 @@ module.exports = {
 
       socket.on("disconnect", () => {
         console.log("user disconnected");
+        clearInterval(interval);
       });
     });
+
     strapi.io = io;
   },
 };

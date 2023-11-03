@@ -30,6 +30,7 @@ export default factories.createCoreService(
         },
       });
     },
+
     async findAndUpdateBidPrice(found, price) {
       return strapi.entityService.update("api::product.product", found.id, {
         data: {

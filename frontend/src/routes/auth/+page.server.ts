@@ -27,6 +27,7 @@ export const actions = {
 			}
 
 			cookies.set('sessionjwt', data.jwt);
+			cookies.set('userid', data.user.id);
 			return { success: true };
 		} catch (err) {
 			console.log(err);
@@ -56,6 +57,7 @@ export const actions = {
 			}
 
 			cookies.set('sessionjwt', data.jwt);
+			cookies.set('userid', data.user.id);
 			return { success: true };
 		} catch (err) {
 			console.log(err);

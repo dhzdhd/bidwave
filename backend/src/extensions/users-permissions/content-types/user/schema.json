@@ -66,10 +66,10 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "account": {
+    "bid": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::account.account",
+      "target": "api::bid.bid",
       "mappedBy": "user"
     }
   }

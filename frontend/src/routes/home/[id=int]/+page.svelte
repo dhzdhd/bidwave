@@ -26,10 +26,12 @@
 	};
 
 	const makeBid = () => {
+		console.log(data.userid);
+
 		socket.emit('makeBid', {
 			bidValue: currentBid,
-			product: product.id
-			// user: user.id, TODO:
+			product: product.id,
+			user: data.userid
 		});
 	};
 

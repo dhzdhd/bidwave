@@ -13,6 +13,6 @@ export const load: PageServerLoad = async ({ params, parent, cookies }) => {
 	} else {
 		const data = filtered[0];
 
-		return { product: data, token: cookies.get('sessionjwt') };
+		return { product: data, token: cookies.get('sessionjwt'), userid: cookies.get('userid') };
 	}
 };

@@ -16,17 +16,17 @@
       "type": "biginteger",
       "required": true
     },
-    "account": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::account.account",
-      "inversedBy": "bids"
-    },
     "product": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::product.product",
       "inversedBy": "bids"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "bid"
     }
   }
 }

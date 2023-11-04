@@ -4,7 +4,9 @@
 	import moment from 'moment';
 	import socketIOClient, { Socket } from 'socket.io-client';
 	import { onMount } from 'svelte';
-	import type { Product } from '../+layout.server.js';
+	import type { Product } from '../+layout.server';
+	import { browser } from '$app/environment';
+	import { goto } from '$app/navigation';
 	export let data;
 
 	let product = data.product;
@@ -30,7 +32,6 @@
 		remaining = moment.duration(time.diff(now));
 
 		if (now.isSameOrAfter(time)) {
-			socket.disconnect();
 			product.available = false;
 		}
 	};
@@ -55,8 +56,10 @@
 		});
 
 		socket.on('loadBids', (data: any) => {
-			isWinner = Number(data.user) === 0;
-			// TODO: Get user id from writable made in login page
+			if (browser) {
+				const user = window.localStorage.getItem('user');
+				isWinner = Number(data.user) === Number(user);
+			}
 		});
 	});
 
@@ -72,17 +75,19 @@
 	<img src={product.image.url} id="img" alt={product.image.alt} />
 	<div class="details">
 		<h2 class="price">${product.bidPrice}</h2>
-		<div class="timer">
-			<span>
-				{remaining.days()} days
-			</span>
-			<span class="__timer" id="hours">{remaining.hours()}</span>
-			<span class="__timer-label">hr</span>
-			<span class="__timer" id="minutes">{remaining.minutes()}</span>
-			<span class="__timer-label">min</span>
-			<span class="__timer" id="seconds">{remaining.seconds()}</span>
-			<span class="__timer-label">sec</span>
-		</div>
+		{#if product.available}
+			<div class="timer">
+				<span>
+					{remaining.days()} days
+				</span>
+				<span class="__timer" id="hours">{remaining.hours()}</span>
+				<span class="__timer-label">hr</span>
+				<span class="__timer" id="minutes">{remaining.minutes()}</span>
+				<span class="__timer-label">min</span>
+				<span class="__timer" id="seconds">{remaining.seconds()}</span>
+				<span class="__timer-label">sec</span>
+			</div>
+		{/if}
 		<h4>Product Details</h4>
 		<span>{product.description}</span>
 	</div>
@@ -91,6 +96,15 @@
 
 	{#if !product.available}
 		<h1>Auction ended!</h1>
+	{/if}
+
+	{#if isWinner && !product.available}
+		<h1>You won the auction!</h1>
+		<Button
+			id="payment-btn"
+			text="Proceed to payment"
+			func={() => goto(`/home/payment?id=${product.id}`)}
+		/>
 	{/if}
 </section>
 

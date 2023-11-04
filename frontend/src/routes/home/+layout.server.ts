@@ -48,28 +48,30 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
 	}
 
 	return {
-		products: productJson.data.map((e: any) => {
-			const rawImage = e['attributes']['image']['data'][0]['attributes'];
+		products: productJson.data
+			.map((e: any) => {
+				const rawImage = e['attributes']['image']['data'][0]['attributes'];
 
-			return {
-				id: e['id'],
-				name: e['attributes']['name'],
-				auctionEnd: e['attributes']['auction_end'],
-				auctionStart: e['attributes']['auction_start'],
-				price: e['attributes']['price'],
-				bidPrice: e['attributes']['bid_price'],
-				description: e['attributes']['description'],
-				available: e['attributes']['available'],
-				category: e['attributes']['category']['data']['attributes']['name'],
-				image: {
-					alt: rawImage['name'],
-					width: rawImage['width'],
-					height: rawImage['height'],
-					mime: rawImage['mime'],
-					url: `${url}${rawImage['url']}`
-				} satisfies Image
-			} satisfies Product;
-		}),
+				return {
+					id: e['id'],
+					name: e['attributes']['name'],
+					auctionEnd: e['attributes']['auction_end'],
+					auctionStart: e['attributes']['auction_start'],
+					price: e['attributes']['price'],
+					bidPrice: e['attributes']['bid_price'],
+					description: e['attributes']['description'],
+					available: e['attributes']['available'],
+					category: e['attributes']['category']['data']['attributes']['name'],
+					image: {
+						alt: rawImage['name'],
+						width: rawImage['width'],
+						height: rawImage['height'],
+						mime: rawImage['mime'],
+						url: `${url}${rawImage['url']}`
+					} satisfies Image
+				} satisfies Product;
+			})
+			.filter((e: Product) => e.available),
 		categories: categoryJson.data.map((e: any) => {
 			return e['attributes']['name'];
 		})

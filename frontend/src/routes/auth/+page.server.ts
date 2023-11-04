@@ -28,7 +28,7 @@ export const actions = {
 
 			cookies.set('sessionjwt', data.jwt);
 			cookies.set('userid', data.user.id);
-			return { success: true };
+			return { success: true, id: data.user.id };
 		} catch (err) {
 			console.log(err);
 			return fail(500, { message: 'Failed to login!' });
@@ -58,7 +58,7 @@ export const actions = {
 
 			cookies.set('sessionjwt', data.jwt);
 			cookies.set('userid', data.user.id);
-			return { success: true };
+			return { success: true, id: data.user.id };
 		} catch (err) {
 			console.log(err);
 			return fail(500, { message: 'Failed to register!' });

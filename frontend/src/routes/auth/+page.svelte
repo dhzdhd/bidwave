@@ -1,13 +1,25 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+	import { applyAction, enhance } from '$app/forms';
 	import { page } from '$app/stores';
 	import { fade, fly } from 'svelte/transition';
+	import type { ActionData } from './$types';
+	import { writable } from 'svelte/store';
+	import { useWritable } from '$lib/stores/auth';
+	import { browser } from '$app/environment';
 
 	let isSignIn = true;
 	let email = '';
 	let password = '';
 	let name = '';
 	let showPopup = false;
+
+	export let form: ActionData;
+
+	const updateUser = () => {
+		if (browser) {
+			window.localStorage.setItem('user', form?.id);
+		}
+	};
 
 	$: if ($page.status !== 200) {
 		showPopup = true;
@@ -26,7 +38,17 @@
 
 <div in:fly|local={{ y: 200 }} class="container" id="container">
 	<div class="form-container {isSignIn ? 'sign-in-container' : 'sign-up-container'}">
-		<form method="POST" action={isSignIn ? '?/login' : '?/register'} use:enhance>
+		<form
+			method="POST"
+			action={isSignIn ? '?/login' : '?/register'}
+			use:enhance={() => {
+				return async ({ result, update }) => {
+					// await applyAction(result);
+					update();
+					updateUser();
+				};
+			}}
+		>
 			<h1>{isSignIn ? 'Sign In' : 'Create Account'}</h1>
 			{#if !isSignIn}
 				<input bind:value={name} name="name" type="text" placeholder="Name" />

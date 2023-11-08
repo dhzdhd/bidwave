@@ -91,7 +91,7 @@
 		<h4>Product Details</h4>
 		<span>{product.description}</span>
 	</div>
-	<input bind:value={currentBid} type="number" />
+	<input bind:value={currentBid} type="number" class="input" />
 	<Button id="bid-btn" text="Make Bid" func={makeBid} />
 
 	{#if !product.available}
@@ -133,4 +133,13 @@ section
 
         .timer
             font-size: 2rem
+    input
+        background-color: vars.$secondary
+        padding: 12px 15px
+        margin: 8px 0
+        width: 10rem
+        border-radius: 15px
+        border: none
+        color: white
+
 </style>

@@ -23,7 +23,7 @@ export const actions = {
 			const data = await response.json();
 
 			if (response.status !== 200) {
-				return fail(response.status, { message: JSON.stringify(data) });
+				return fail(response.status, { message: data.error.message });
 			}
 
 			cookies.set('sessionjwt', data.jwt);
@@ -53,7 +53,7 @@ export const actions = {
 			const data = await response.json();
 
 			if (response.status !== 200) {
-				return fail(response.status, { message: JSON.stringify(data) });
+				return fail(response.status, { message: data.error.message });
 			}
 
 			cookies.set('sessionjwt', data.jwt);

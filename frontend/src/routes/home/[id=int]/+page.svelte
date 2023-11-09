@@ -50,12 +50,16 @@
 		socket = socketIOClient(CMS_URL, { query: { token: data.token } });
 		socket.emit('loadProducts', { id: product.id });
 		socket.on('loadProducts', (data: any) => {
+			console.log('products loaded');
+
 			console.log(data);
 
 			updateProduct(data);
 		});
 
 		socket.on('loadBids', (data: any) => {
+			console.log('bids loaded');
+
 			if (browser) {
 				const user = window.localStorage.getItem('user');
 				isWinner = Number(data.user) === Number(user);
@@ -72,7 +76,7 @@
 
 <section>
 	<h1>{product.name}</h1>
-	<img src={product.image.url} id="img" alt={product.image.alt} />
+	<img src={product.image.url} id="img" alt={product.image.alt} class="image" />
 	<div class="details">
 		<h2 class="price">${product.bidPrice}</h2>
 		{#if product.available}
@@ -91,20 +95,24 @@
 		<h4>Product Details</h4>
 		<span>{product.description}</span>
 	</div>
-	<input bind:value={currentBid} type="number" class="input" />
-	<Button id="bid-btn" text="Make Bid" func={makeBid} />
-
-	{#if !product.available}
-		<h1>Auction ended!</h1>
+	{#if product.available}
+		<input bind:value={currentBid} type="number" class="input" />
+		<Button id="bid-btn" text="Make Bid" func={makeBid} />
 	{/if}
 
-	{#if isWinner && !product.available}
-		<h1>You won the auction!</h1>
-		<Button
-			id="payment-btn"
-			text="Proceed to payment"
-			func={() => goto(`/home/payment?id=${product.id}`)}
-		/>
+	{#if !product.available}
+		<div class="dialog">
+			{#if isWinner}
+				<h1>You won the auction!</h1>
+				<Button
+					id="payment-btn"
+					text="Proceed to payment"
+					func={() => goto(`/home/payment?id=${product.id}`)}
+				/>
+			{:else}
+				<h1>Auction ended!</h1>
+			{/if}
+		</div>
 	{/if}
 </section>
 
@@ -127,6 +135,10 @@ section
         font-size: 2rem
         color: vars.$text
 
+    img
+        width:auto
+        height: 25rem		
+
     .details
         .price
             color: vars.$accent
@@ -141,5 +153,17 @@ section
         border-radius: 15px
         border: none
         color: white
+
+    .dialog
+        position: fixed
+        background-color: vars.$primary
+        box-shadow: 0rem 0rem 100vh 100vh black
+        display: flex
+        flex-direction: column
+        gap: 1rem
+        padding: 5rem
+        border-radius: 2rem
+        top: 40vh
+        z-index: 0
 
 </style>

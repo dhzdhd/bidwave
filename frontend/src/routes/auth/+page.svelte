@@ -15,7 +15,9 @@
 
 	export let form: ActionData;
 
-	const updateUser = () => {
+	$: updateUser(form);
+
+	const updateUser = (form: ActionData) => {
 		if (browser) {
 			window.localStorage.setItem('user', form?.id);
 		}
@@ -44,8 +46,10 @@
 			use:enhance={() => {
 				return async ({ result, update }) => {
 					// await applyAction(result);
+					console.log(result);
+
 					update();
-					updateUser();
+					updateUser(form);
 				};
 			}}
 		>

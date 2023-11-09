@@ -83,13 +83,16 @@ section
     .search-container
         display: flex
         justify-content: center
-        height: 2rem
+        height: 2.5rem
+        
 
         .search-select
             background-color: vars.$accent
             color: vars.$inverted
             border-color: vars.$accent
-            border-radius: 0.3rem 0rem 0rem 0.3rem
+            border-radius: 0.5rem 0rem 0rem 0.5rem
+            min-width:  5rem
+            padding-left:  0.5rem
 
         .search-input
             padding: 0rem 0.3rem
@@ -97,14 +100,17 @@ section
             color: vars.$text
             border: 1px solid
             border-color: vars.$accent
+            width:20rem
 
         .search-btn
             background-color: vars.$accent
             color: vars.$inverted
-            width: 2rem
+            width: 3rem
             border: none
-            border-radius: 0rem 0.3rem 0.3rem 0rem
+            border-radius: 0rem 0.5rem 0.5rem 0rem
             cursor: pointer
+            
+
 
     .container
         display: grid

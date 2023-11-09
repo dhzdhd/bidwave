@@ -55,7 +55,7 @@
 					<div class="description">
 						<span class="category">Clothes</span>
 						<h5 class="title">{product.name}</h5>
-						<h4 class="price">${product.bidPrice}</h4>
+						<h4 class="price">₹{product.bidPrice}</h4>
 					</div>
 				</div>
 			</button>
@@ -86,7 +86,7 @@ section
         display: flex
         justify-content: center
         height: 2.5rem
-        
+
 
         .search-select
             background-color: vars.$accent
@@ -111,24 +111,24 @@ section
             border: none
             border-radius: 0rem 0.5rem 0.5rem 0rem
             cursor: pointer
-            
+
 
 
     .container
         display: grid
         gap: 1rem
         grid-template-columns: repeat(4, 1fr)
-        
 
-         
-                   
+
+
+
         .product
-            
+
             height: 27rem
             width: 20rem
             padding: 10px 12px
             border-radius: 25px
-            
+
             cursor: pointer
             transition: 0.2s
             border: none
@@ -136,12 +136,12 @@ section
 
             &:hover
                 box-shadow: 2px 2px 10px vars.$accent
-            
+
             img
                 width: 18.5rem
                 height:auto
                 border-radius: 20px
-                
+
 
 
             .description
@@ -151,12 +151,12 @@ section
                 .category
                     color: vars.$text
                     font-size: 12px
-                    
+
                 .title
-                
+
                     color: vars.$inverted
                     font-size: 14px
-                
+
 
                 .price
                     padding-top: 7px

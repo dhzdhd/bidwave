@@ -17,7 +17,7 @@ export const load: PageServerLoad = async ({ url, parent }) => {
 		const product = products.products.filter((e) => e.id === id)[0];
 
 		const response = await razorpay.orders.create({
-			amount: product.bidPrice,
+			amount: product.bidPrice * 100,
 			currency: 'INR'
 		});
 		return { product, id: response.id };

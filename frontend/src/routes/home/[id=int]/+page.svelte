@@ -97,7 +97,7 @@
 	<div class="details">
 		<h4>Product Details</h4>
 		<span>{product.description}</span>
-		<h2 class="price">${product.bidPrice}</h2>
+		<h2 class="price">₹{product.bidPrice}</h2>
 		{#if product.available}
 			<div class="timer">
 				<span>

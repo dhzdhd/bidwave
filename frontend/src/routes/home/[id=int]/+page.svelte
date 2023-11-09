@@ -7,6 +7,7 @@
 	import type { Product } from '../+layout.server';
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
+	import { fade, fly } from 'svelte/transition';
 	export let data;
 
 	let product = data.product;
@@ -15,9 +16,18 @@
 	let isWinner: boolean = false;
 	let currentlyWinning: boolean = false;
 
+	let showPopup = false;
+	let popupMessage = 'Error';
+
 	const time = moment.parseZone(product.auctionEnd, moment.ISO_8601);
 	const now = moment();
 	let remaining = moment.duration(time.diff(now));
+
+	$: if (showPopup) {
+		setTimeout(() => {
+			showPopup = false;
+		}, 2000);
+	}
 
 	const updateProduct = (data: any) => {
 		const newProduct = {
@@ -39,6 +49,12 @@
 
 	const makeBid = () => {
 		console.log(data.userid);
+
+		if (currentBid < 50) {
+			showPopup = true;
+			popupMessage = 'Bid amount should be atleast 50';
+			return;
+		}
 
 		socket.emit('makeBid', {
 			bidValue: currentBid,
@@ -116,6 +132,11 @@
 			{/if}
 		</div>
 	{/if}
+	{#if showPopup}
+		<div in:fly={{ y: 200 }} out:fade class="popup">
+			{popupMessage}
+		</div>
+	{/if}
 </section>
 
 <style lang="sass">
@@ -138,8 +159,8 @@ section
         color: vars.$text
 
     img
-        width:auto
-        height: 25rem		
+        width: auto
+        height: 25rem
 
     .details
         .price
@@ -168,4 +189,14 @@ section
         top: 40vh
         z-index: 0
 
+.popup
+    position: fixed
+    bottom: 2rem
+    color: white
+    font-size: 1rem
+    font-weight: bold
+    background-color: red
+    padding: 0.5rem 2rem
+    border-radius: 1rem
+    z-index: 100
 </style>

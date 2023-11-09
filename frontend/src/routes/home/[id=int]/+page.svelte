@@ -11,8 +11,9 @@
 
 	let product = data.product;
 	let socket: Socket;
-	let currentBid: number = 0;
+	let currentBid: number = 50;
 	let isWinner: boolean = false;
+	let currentlyWinning: boolean = false;
 
 	const time = moment.parseZone(product.auctionEnd, moment.ISO_8601);
 	const now = moment();
@@ -96,7 +97,7 @@
 		<span>{product.description}</span>
 	</div>
 	{#if product.available}
-		<input bind:value={currentBid} type="number" class="input" />
+		<input bind:value={currentBid} type="number" min="50" class="input" />
 		<Button id="bid-btn" text="Make Bid" func={makeBid} />
 	{/if}
 
@@ -110,7 +111,8 @@
 					func={() => goto(`/home/payment?id=${product.id}`)}
 				/>
 			{:else}
-				<h1>Auction ended!</h1>
+				<h1>You lost the auction!</h1>
+				<h2>Good luck next time!</h2>
 			{/if}
 		</div>
 	{/if}

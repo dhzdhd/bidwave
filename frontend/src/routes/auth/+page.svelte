@@ -15,11 +15,9 @@
 
 	export let form: ActionData;
 
-	$: updateUser(form);
-
-	const updateUser = (form: ActionData) => {
+	const updateUser = (res?: any) => {
 		if (browser) {
-			window.localStorage.setItem('user', form?.id);
+			window.localStorage.setItem('user', res['data']['id'] ?? form?.id);
 		}
 	};
 
@@ -45,11 +43,11 @@
 			action={isSignIn ? '?/login' : '?/register'}
 			use:enhance={() => {
 				return async ({ result, update }) => {
-					// await applyAction(result);
-					console.log(result);
-
 					update();
-					updateUser(form);
+
+					if (result['status'] === 200) {
+						updateUser(result);
+					}
 				};
 			}}
 		>

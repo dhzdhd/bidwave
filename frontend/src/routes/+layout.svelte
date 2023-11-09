@@ -63,6 +63,7 @@
 		align-items: center
 		padding: 1rem 2rem
 		color: var(--secondary-color)
+		z-index: 10
 
 		.title
 			display: flex
@@ -121,6 +122,7 @@
 		align-items: center
 		padding: 20px
 		background-color: vars.$accent
+		z-index: 10
 
 		.social-link
 			margin: 0 10px

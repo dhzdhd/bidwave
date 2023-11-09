@@ -64,7 +64,10 @@ module.exports = {
             .service("api::product.product")
             .loadProducts(params.id);
 
+          let bid = await strapi.service("api::bid.bid").loadBids(params.id);
+
           io.emit("loadProducts", data);
+          io.emit("loadBids", bid);
         } catch (error) {
           console.log(error);
         }

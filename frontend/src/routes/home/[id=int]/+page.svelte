@@ -131,7 +131,7 @@
 				/>
 			{:else}
 				<h1>You lost the auction!</h1>
-				<h2>Good luck next time!</h2>
+				<h2>Better luck next time!</h2>
 			{/if}
 		</div>
 	{/if}

@@ -77,7 +77,7 @@
 
 <section>
 	<h1>{product.name}</h1>
-	<img src={product.image.url} id="img" alt={product.image.alt} />
+	<img src={product.image.url} id="img" alt={product.image.alt} class="image" />
 	<div class="details">
 		<h2 class="price">${product.bidPrice}</h2>
 		{#if product.available}
@@ -136,6 +136,10 @@ section
     h1
         font-size: 2rem
         color: vars.$text
+
+    img
+        width:auto
+        height: 25rem		
 
     .details
         .price

@@ -95,6 +95,8 @@
 	<h1>{product.name}</h1>
 	<img src={product.image.url} id="img" alt={product.image.alt} class="image" />
 	<div class="details">
+		<h4>Product Details</h4>
+		<span>{product.description}</span>
 		<h2 class="price">${product.bidPrice}</h2>
 		{#if product.available}
 			<div class="timer">
@@ -109,8 +111,9 @@
 				<span class="__timer-label">sec</span>
 			</div>
 		{/if}
-		<h4>Product Details</h4>
-		<span>{product.description}</span>
+		<h1 class="win-state">
+			Currently {isWinner ? 'Winning!' : 'Losing!'}
+		</h1>
 	</div>
 	{#if product.available}
 		<input bind:value={currentBid} type="number" min="50" class="input" />
@@ -159,15 +162,21 @@ section
         color: vars.$text
 
     img
+        padding-top: 2rem
         width: auto
         height: 25rem
 
     .details
         .price
+            padding-top: 2rem
             color: vars.$accent
 
         .timer
             font-size: 2rem
+
+        .win-state
+            padding: 2rem 0rem
+
     input
         background-color: vars.$secondary
         padding: 12px 15px
